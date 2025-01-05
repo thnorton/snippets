@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Django",
+            "type": "python", // Updated to the preferred type for Django debugging
+            "request": "launch",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "autoStartBrowser": false,
+            "program": "${workspaceFolder}/manage.py",
+            "console": "integratedTerminal", // Optional: Ensures output is shown in the integrated terminal
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "justMyCode": true
+        }
+    ]
+}
