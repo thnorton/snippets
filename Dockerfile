@@ -19,3 +19,5 @@ EXPOSE 8000
 # Default command to run Django's development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
+# Install Git
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
