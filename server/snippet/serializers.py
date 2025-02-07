@@ -28,4 +28,4 @@ class SnippetSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Snippet
-        fields = ['content', 'info', 'tags']
+        fields = ['id', 'content', 'info', 'tags']
