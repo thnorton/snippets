@@ -8,7 +8,7 @@ export default function SnippetList() {
 
   useEffect(() => {
     fetchSnippets()
-  }, [])
+  }, [fetchSnippets])
 
   if (!snippets.length) return <p>Loading snippets...</p>
 

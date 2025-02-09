@@ -28,7 +28,7 @@ export default function SnippetForm() {
         type="text"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        className="p-2 border rounded w-full"
+        className="p-2 border rounded w-full text-black"
         placeholder="Enter snippet content"
         required
       />
@@ -37,7 +37,7 @@ export default function SnippetForm() {
         type="text"
         value={info}
         onChange={(e) => setInfo(e.target.value)}
-        className="p-2 border rounded w-full"
+        className="p-2 border rounded w-full text-black"
         placeholder="Additional info (optional)"
       />
 
@@ -45,11 +45,11 @@ export default function SnippetForm() {
         type="text"
         value={tags.join(', ')}
         onChange={(e) => setTags(e.target.value.split(',').map((tag) => tag.trim()))}
-        className="p-2 border rounded w-full"
+        className="p-2 border rounded w-full text-black"
         placeholder="Enter tags (comma-separated)"
       />
 
-      <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded-md">
+      <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md w-full">
         Add Snippet
       </button>
       <div className="mt-4">

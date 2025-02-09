@@ -50,7 +50,7 @@ export default function SnippetDetailPage() {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold">{snippet.content}</h1>
-      <p className="mt-2 text-gray-600">{snippet.info}</p>
+      <p className="mt-2 text-black-600">{snippet.info}</p>
 
       <div className="mt-4 flex flex-wrap gap-2">
         {snippet.tags?.map((tag, index) => (

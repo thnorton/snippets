@@ -16,7 +16,6 @@ export default function SnippetSearchPage() {
   }, [])
 
   useEffect(() => {
-    console.log('Snippets:', snippets) // ✅ Debugging output
 
     if (!Array.isArray(snippets)) {
       console.error('Expected snippets to be an array but got:', snippets)
@@ -29,9 +28,12 @@ export default function SnippetSearchPage() {
   }, [snippets])
 
   useEffect(() => {
-    // Filter snippets by selected tags
     if (selectedTags.length > 0) {
-      setResults(snippets.filter(snippet => snippet.tags.some(tag => selectedTags.includes(tag))))
+      setResults(
+        snippets.filter(snippet =>
+          selectedTags.every(tag => snippet.tags.includes(tag))
+        )
+      )
     } else {
       setResults(snippets)
     }
@@ -63,11 +65,11 @@ export default function SnippetSearchPage() {
           type="text"
           value={query}
           onChange={(e) => handleTagSearch(e.target.value)}
-          className="p-2 border rounded w-full"
+          className="p-2 border text-black rounded w-full"
           placeholder="Type to search for tags..."
         />
         {filteredTags.length > 0 && (
-          <ul className="absolute bg-white border mt-1 w-full rounded shadow-md">
+          <ul className="absolute bg-white border mt-1 w-full rounded text-black shadow-md">
             {filteredTags.map((tag) => (
               <li
                 key={tag}
@@ -93,7 +95,7 @@ export default function SnippetSearchPage() {
       <h2 className="text-lg font-semibold mt-6">Results:</h2>
       <ul className="mt-4 space-y-2">
         {results.map((snippet) => (
-          <li key={snippet.id} className="p-2 border rounded bg-white shadow">
+          <li key={snippet.id} className="p-2 border rounded bg-white shadow text-black">
             <a href={`/snippets/${snippet.id}`} className="font-mono block">{snippet.content}</a>
           </li>
         ))}
