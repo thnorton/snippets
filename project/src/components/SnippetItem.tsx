@@ -1,4 +1,4 @@
-import { Snippet } from '@/services/useSnippetService'
+import { Snippet } from '@/types/models'
 
 export default function SnippetItem({ snippet }: { snippet: Snippet }) {
   return (
@@ -7,8 +7,8 @@ export default function SnippetItem({ snippet }: { snippet: Snippet }) {
       <p className="text-gray-600">{snippet.info}</p>
       <div className="mt-2 space-x-2">
         {snippet.tags.map((tag) => (
-          <span key={tag.name} className="px-2 py-1 text-sm bg-gray-200 rounded">
-            {tag.name}
+          <span key={tag} className="px-2 py-1 text-sm bg-gray-200 rounded">
+            {tag}
           </span>
         ))}
       </div>

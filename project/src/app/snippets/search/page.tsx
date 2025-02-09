@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSnippetService } from '@/services/useSnippetService'
+import { useSnippetStore } from '@/stores/snippetStore'
 
 export default function SnippetSearchPage() {
-  const { snippets, fetchSnippets } = useSnippetService()
+  const { snippets, fetchSnippets } = useSnippetStore()
   const [query, setQuery] = useState('')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [filteredTags, setFilteredTags] = useState<string[]>([])
@@ -24,14 +24,14 @@ export default function SnippetSearchPage() {
     }
 
     // Extract unique tags
-    const tags = new Set(snippets.flatMap((snippet) => snippet.tags.map((tag) => tag.name)))
+    const tags = new Set(snippets.flatMap((snippet) => snippet.tags.map((tag) => tag)))
     setAllTags(Array.from(tags))
   }, [snippets])
 
   useEffect(() => {
     // Filter snippets by selected tags
     if (selectedTags.length > 0) {
-      setResults(snippets.filter(snippet => snippet.tags.some(tag => selectedTags.includes(tag.name))))
+      setResults(snippets.filter(snippet => snippet.tags.some(tag => selectedTags.includes(tag))))
     } else {
       setResults(snippets)
     }
