@@ -31,7 +31,7 @@ export default function SnippetDetailPage() {
     }
 
     fetchSnippet()
-  }, [id])
+  }, [getSnippetById, id])
 
   const handleDelete = async () => {
     if (!snippet) return
@@ -49,17 +49,40 @@ export default function SnippetDetailPage() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold">{snippet.content}</h1>
-      <p className="mt-2 text-black-600">{snippet.info}</p>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {snippet.tags?.map((tag, index) => (
-          <span key={index} className="px-3 py-1 bg-gray-300 rounded-full text-sm">
-            {tag}
-          </span>
-        ))}
-      </div>
-
+      <h1 className="text-2xl font-bold mb-4">Snippet Details</h1>
+      
+      {/* Table for Snippet Details */}
+      <table className="w-full border border-gray-300 bg-white shadow-md text-black">
+        <tbody>
+          {/* Info Row */}
+          <tr className="border-b border-gray-300">
+            <td className="p-2 font-semibold border-r border-gray-300 w-1/4">Info:</td>
+            <td className="p-2 whitespace-pre-wrap">{snippet.info}</td>
+          </tr>
+  
+          {/* Content Row */}
+          <tr className="border-b border-gray-300">
+            <td className="p-2 font-semibold border-r border-gray-300">Content:</td>
+            <td className="p-2 whitespace-pre-wrap">{snippet.content}</td>
+          </tr>
+  
+          {/* Tags Row */}
+          <tr>
+            <td className="p-2 font-semibold border-r border-gray-300">Tags:</td>
+            <td className="p-2">
+              <div className="flex flex-wrap gap-2">
+                {snippet.tags?.map((tag, index) => (
+                  <span key={index} className="px-3 py-1 bg-gray-300 rounded-full text-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      {/* Delete Button */}
       <button
         onClick={handleDelete}
         className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
@@ -67,5 +90,6 @@ export default function SnippetDetailPage() {
         Delete Snippet
       </button>
     </div>
-  )
-}
+  );
+  
+}  

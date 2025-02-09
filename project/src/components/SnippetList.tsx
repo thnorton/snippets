@@ -1,22 +1,22 @@
-"use client"
-import { useEffect } from "react"
-import { useSnippetStore } from "@/stores/snippetStore"
-import SnippetItem from "./SnippetItem"
+import { Snippet } from "@/types/models";
 
-export default function SnippetList() {
-  const { snippets, fetchSnippets } = useSnippetStore()
+interface SnippetList {
+  results: Snippet[];
+}
 
-  useEffect(() => {
-    fetchSnippets()
-  }, [fetchSnippets])
-
-  if (!snippets.length) return <p>Loading snippets...</p>
+export default function SnippetList({ results }: SnippetList) {
+  if (results.length === 0) return null;
 
   return (
-    <ul className="mt-6 space-y-4">
-      {snippets.map((snippet) => (
-        <SnippetItem key={snippet.id} snippet={snippet} />
-      ))}
-    </ul>
-  )
+    <div>
+      <h2 className="text-lg font-semibold mt-6">Results:</h2>
+      <ul className="mt-4 space-y-2">
+        {results.map((snippet) => (
+          <li key={snippet.id} className="p-2 border rounded bg-white shadow text-black">
+            <a href={`/snippets/${snippet.id}`} className="font-mono block">{snippet.info}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }

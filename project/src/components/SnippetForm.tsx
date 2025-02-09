@@ -22,13 +22,12 @@ export default function SnippetForm() {
 
   return (
     <form onSubmit={handleSubmit} className="p-6 max-w-4xl mx-auto space-y-4">
-      <h1 className="text-2xl font-bold">Add a Snippet</h1>
-
-      <input
-        type="text"
+      <h1 className="text-2xl font-bold text-center">Snippet Manager</h1>
+      {/* Multi-line Textarea for Content */}
+      <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        className="p-2 border rounded w-full text-black"
+        className="p-2 border rounded w-full text-black resize-y min-h-[150px] max-h-[300px]"
         placeholder="Enter snippet content"
         required
       />
@@ -38,7 +37,7 @@ export default function SnippetForm() {
         value={info}
         onChange={(e) => setInfo(e.target.value)}
         className="p-2 border rounded w-full text-black"
-        placeholder="Additional info (optional)"
+        placeholder="Enter snippet description"
       />
 
       <input

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useSnippetStore } from '@/stores/snippetStore'
+import SnippetList from "@/components/SnippetList"
+
 
 export default function SnippetSearchPage() {
   const { snippets, fetchSnippets } = useSnippetStore()
@@ -91,15 +93,8 @@ export default function SnippetSearchPage() {
           </span>
         ))}
       </div>
-
-      <h2 className="text-lg font-semibold mt-6">Results:</h2>
-      <ul className="mt-4 space-y-2">
-        {results.map((snippet) => (
-          <li key={snippet.id} className="p-2 border rounded bg-white shadow text-black">
-            <a href={`/snippets/${snippet.id}`} className="font-mono block">{snippet.content}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {selectedTags.length > 0 && (
+        <SnippetList results={results} /> )}
+      </div>
   )
 }
