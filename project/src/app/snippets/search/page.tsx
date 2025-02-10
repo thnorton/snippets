@@ -18,13 +18,7 @@ export default function SnippetSearchPage() {
   }, [])
 
   useEffect(() => {
-
-    if (!Array.isArray(snippets)) {
-      console.error('Expected snippets to be an array but got:', snippets)
-      return
-    }
-
-    // Extract unique tags
+    // Extract only unique tags
     const tags = new Set(snippets.flatMap((snippet) => snippet.tags.map((tag) => tag)))
     setAllTags(Array.from(tags))
   }, [snippets])

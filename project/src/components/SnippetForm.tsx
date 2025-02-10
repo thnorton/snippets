@@ -23,7 +23,7 @@ export default function SnippetForm() {
   return (
     <form onSubmit={handleSubmit} className="p-6 max-w-4xl mx-auto space-y-4">
       <h1 className="text-2xl font-bold text-center">Snippet Manager</h1>
-      {/* Multi-line Textarea for Content */}
+
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
