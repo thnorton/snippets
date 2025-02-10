@@ -12,8 +12,6 @@ import {
   where
 } from "firebase/firestore"
 import { Snippet } from '@/types/models'
-// Snippet Type
-
 
 // Firestore collection name
 const SNIPPETS_COLLECTION = "snippets"
@@ -80,7 +78,7 @@ export const useSnippetStore = create<SnippetStore>((set, get) => ({
     try {
       const docRef = doc(db, SNIPPETS_COLLECTION, snippetId)
       await updateDoc(docRef, updatedData)
-      get().fetchSnippets() // Refresh snippet list
+      get().fetchSnippets()
     } catch (error) {
       console.error("Error updating snippet:", error)
       throw error
@@ -91,17 +89,16 @@ export const useSnippetStore = create<SnippetStore>((set, get) => ({
   deleteSnippet: async (snippetId) => {
     try {
       await deleteDoc(doc(db, SNIPPETS_COLLECTION, snippetId))
-      get().fetchSnippets() // Refresh snippet list
+      get().fetchSnippets()
     } catch (error) {
       console.error("Error deleting snippet:", error)
       throw error
     }
   },
 
-  // Search snippets by multiple tags (optimized for multiple tag search)
+  // Search snippets by multiple tags
   searchSnippetsByTags: async (tags) => {
     try {
-      if (tags.length === 0) return get().snippets // Return all if no tags selected
       const q = query(collection(db, SNIPPETS_COLLECTION), where("tags", "array-contains-any", tags))
       const querySnapshot = await getDocs(q)
       return querySnapshot.docs.map((doc) => ({
