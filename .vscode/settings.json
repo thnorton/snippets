@@ -3,13 +3,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
-  "python.analysis.extraPaths": ["./server"],
-  "flake8.cwd": "${workspaceFolder}/server",
   "eslint.validate": ["javascript", "typescript"],
-  "typescript.tsdk": "${workspaceFolder}/client/node_modules/typescript/lib",
-  "shellcheck.ignorePatterns": {
-    "**/.env*": true
-  },
+  "typescript.tsdk": "${workspaceFolder}/project/node_modules/typescript/lib",
   "terminal.integrated.defaultProfile.osx": "zsh",
 
   "terminal.integrated.profiles.osx": {
