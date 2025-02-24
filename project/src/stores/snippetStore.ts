@@ -19,6 +19,7 @@ const SNIPPETS_COLLECTION = "snippets"
 interface SnippetStore {
   snippets: Snippet[]
   fetchSnippets: () => Promise<void>
+  fetchUniqueTags: () => Promise<string[]>
   createSnippet: (content: string, info: string, tags: string[]) => Promise<string>
   getSnippetById: (snippetId: string) => Promise<Snippet | null>
   updateSnippet: (snippetId: string, updatedData: Partial<Snippet>) => Promise<void>
@@ -41,6 +42,23 @@ export const useSnippetStore = create<SnippetStore>((set, get) => ({
       set({ snippets })
     } catch (error) {
       console.error("Error fetching snippets:", error)
+    }
+  },
+
+  fetchUniqueTags: async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, SNIPPETS_COLLECTION))
+
+      // Get all tags from snippets and merge them into a single array
+      const allTags = querySnapshot.docs.flatMap(doc => doc.data().tags || []);
+
+      // Convert to a Set to remove duplicates, then back to an array
+      const uniqueTags = Array.from(new Set(allTags));
+
+      return uniqueTags;
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+      return [];
     }
   },
 

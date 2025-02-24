@@ -9,6 +9,7 @@ export default function SnippetDetailPage() {
   const { getSnippetById, deleteSnippet } = useSnippetStore()
   const { id } = useParams() as { id: string }
   const router = useRouter()
+
   const [snippet, setSnippet] = useState<Snippet | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -39,7 +40,7 @@ export default function SnippetDetailPage() {
     const confirmDelete = window.confirm('Are you sure you want to delete this snippet?')
     if (confirmDelete) {
       await deleteSnippet(snippet.id)
-      router.push('/snippets') // Redirect to snippets list after deletion
+      router.push('/snippets/search') // Redirect to snippet search after deletion
     }
   }
 
@@ -50,46 +51,39 @@ export default function SnippetDetailPage() {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Snippet Details</h1>
-      
-      {/* Table for Snippet Details */}
-      <table className="w-full border border-gray-300 bg-white shadow-md text-black">
-        <tbody>
-          {/* Info Row */}
-          <tr className="border-b border-gray-300">
-            <td className="p-2 font-semibold border-r border-gray-300 w-1/4">Info:</td>
-            <td className="p-2 whitespace-pre-wrap">{snippet.info}</td>
-          </tr>
-  
-          {/* Content Row */}
-          <tr className="border-b border-gray-300">
-            <td className="p-2 font-semibold border-r border-gray-300">Content:</td>
-            <td className="p-2 whitespace-pre-wrap">{snippet.content}</td>
-          </tr>
-  
-          {/* Tags Row */}
-          <tr>
-            <td className="p-2 font-semibold border-r border-gray-300">Tags:</td>
-            <td className="p-2">
-              <div className="flex flex-wrap gap-2">
-                {snippet.tags?.map((tag, index) => (
-                  <span key={index} className="px-3 py-1 bg-gray-300 rounded-full text-sm">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  
-      {/* Delete Button */}
-      <button
-        onClick={handleDelete}
-        className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-      >
-        Delete Snippet
-      </button>
+
+      {/* ✅ Display snippet details */}
+      <div className="border border-gray-300 rounded-md p-4 bg-white shadow">
+        <p className="font-semibold">Description:</p>
+        <p className="text-gray-700">{snippet.info}</p>
+
+        <p className="font-semibold mt-4">Content:</p>
+        <pre className="bg-gray-100 p-2 rounded text-gray-800 whitespace-pre-wrap">{snippet.content}</pre>
+
+        <p className="font-semibold mt-4">Tags:</p>
+        <div className="flex flex-wrap gap-2">
+          {snippet.tags.map((tag, index) => (
+            <span key={index} className="px-3 py-1 bg-gray-300 rounded-full text-sm">{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* ✅ Buttons */}
+      <div className="mt-4 flex justify-between">
+        <button
+          onClick={() => router.push(`/snippets/${id}/edit`)}
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          Edit Snippet
+        </button>
+
+        <button
+          onClick={handleDelete}
+          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+        >
+          Delete Snippet
+        </button>
+      </div>
     </div>
-  );
-  
-}  
+  )
+}
