@@ -53,10 +53,8 @@ export default function EditSnippetPage() {
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Edit Snippet</h1>
 
-      {/* ✅ SnippetForm pre-filled with snippet data */}
       <SnippetForm onSubmit={handleUpdateSnippet} initialData={snippet} />
 
-      {/* ✅ Back Button */}
       <div className="mt-4 flex justify-end">
         <button
           onClick={() => router.push(`/snippets/${id}`)}
