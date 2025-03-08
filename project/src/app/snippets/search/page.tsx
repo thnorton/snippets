@@ -21,18 +21,6 @@ export default function SnippetSearchPage() {
     fetchData();
   }, [snippets.length]);
 
-  /**
-   * useMemo lets you cache the result of a function between renders
-   * Extracts all snippets into a single array, then converts into set removing duplicates
-   * Then converts back into array for use in component for search
-   */
-
-  /*
-  const allTags = useMemo(() => {
-    return Array.from(new Set(snippets.flatMap(snippet => snippet.tags)))
-  }, [snippets])
-*/
-
 useEffect(() => {
   async function getTags() {
     const uniqueTags = await fetchUniqueTags();

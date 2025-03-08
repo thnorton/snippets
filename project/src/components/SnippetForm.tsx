@@ -23,7 +23,7 @@ export default function SnippetForm({ onSubmit, initialData }: SnippetFormProps)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // ✅ Process tags only on submit
+    //Process tags only on submit
     const tagsArray = tagInput
       .split(',')
       .map(tag => tag.trim())
@@ -52,7 +52,6 @@ export default function SnippetForm({ onSubmit, initialData }: SnippetFormProps)
         placeholder="Enter snippet description"
       />
 
-      {/* ✅ Keep tags as a single string input */}
       <input
         type="text"
         value={tagInput}
